@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Dashboard
+        </title>
+        <link rel="stylesheet" href="/admin_dashboard.css">
+    </head>
+    <body>
+        <nav class="navbar">
+            <h1 class="logo">ADMIN PANEL</h1>
+            <% if(msg){%>
+                <% setTimeout(()=>{
+                    msg = ""
+                },3000); %>
+                <p> <%= msg %></p>
+            <% } %>
+            <div class="system">
+                <a class="import" href="/import">IMPORT</a>
+                <a class="profile" href="/profile">Profile</a>
+                 <a class="logout" href="/logout">Log Out</a>
+            </div>
+        </nav>
+        <div class="hero">
+            <section class="adduser">
+                <h4>ADD USER</h4>
+                <p>here you can add a user</p>
+                 <a class="adduser" href="/add/user">ADD USER</a>
+            </section>
+            <section class="searchdata">
+                <h4>SEARCH DATA</h4>
+                <p>here you can find info about students and faculty</p>
+                <a class="search" href="/search">SEARCH</a>
+            </section>
+            <section class="updatedata">
+                <h4>UPDATE DATA</h4>
+                <p>update or add data</p>
+                <a class="update" href="/update/data">UPDATE</a>
+            </section>
+            <section class="addadmin">
+                <h4>ADD ADMIN</h4>
+                <p>add admins</p>
+                <a class="addadmin" href="/add/admin">ADD</a>
+            </section>
+            <section class="deleteuser">
+                <h4>DELETE USER</h4>
+                <p>you can delete any user</p>
+                <a class="deleteuser" href="/delete/user">DELETE</a>
+            </section>
+            <section class="deletedata">
+                <h4>DELETE DATA</h4>
+                <p>you can delete any data</p>
+                <a class="deletedata" href="/delete/data">DELETE</a>
+            </section>
+            <section class="deleteadmin">
+                <h4>DELETE ADMIN</h4>
+                <p>you can delete any admin</p>
+                <a class="deleteadmin" href="/delete/admin">DELETE</a>
+            </section>
+        </div>
+    </body>
+</html>

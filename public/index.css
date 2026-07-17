@@ -1,0 +1,85 @@
+*{
+    box-sizing:border-box;
+}
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background:linear-gradient(1500deg,rgb(111, 165, 252),rgb(215, 103, 103));
+}
+.form-card{
+    width:min(420px,calc(100% - 40px));
+background: rgba(255, 255, 255, 0.1);
+border-radius: 20px;
+padding:min(32px,12rem);
+gap:10px;
+transition:box-shadow 0.2s ease;
+    transition:transform 0.4s ease;
+
+
+}
+.form-card:hover{
+    transform:scale(1.01);
+    box-shadow: 0 0 2px;
+}
+
+
+label{
+    display:block;
+    margin:5px;
+    font-size: min(17px,calc(4vw));
+    font-weight: 500;
+
+}
+.form-card input{
+    border-radius: 5px;
+    width:100%;
+    padding:5px;
+    transition:transform 0.7s ease;
+}
+input:focus,input:hover{
+    border:3px solid rgb(107, 107, 207);
+    transform: scale(1.17);
+}
+.button{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:25px;
+    gap:5px
+}
+.form-card #button{
+    border-radius: 5px;
+    width:max(min(80px,100%));
+    padding:8px;
+    transition: transform 0.35s ease;
+}
+#button:hover{
+    transform: scale(1.05);
+    cursor: pointer;
+}
+#see{
+    transition: transform 0.3s ease;
+}
+#see:hover{
+    cursor:pointer;
+}
+a{
+    padding:8px;
+
+    align-self:last baseline;
+    color:rgb(0, 5, 7);
+    text-decoration: none;
+    transition:transform 0.25s ease ;
+}
+a:hover{
+    color:rgb(44, 103, 181);
+    transform: scale(1.05);
+}
+.error{
+    display:inline;
+    margin-left:2em;
+    color:rgb(79, 46, 129)
+}

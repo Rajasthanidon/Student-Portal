@@ -1,0 +1,108 @@
+html,body{
+    margin:0;
+    /* background: linear-gradient(90deg,#d069b1,#4961cb); */
+     background:linear-gradient(1500deg,rgb(111, 165, 252),rgb(215, 103, 103));
+    min-height: 100%;
+}
+body{
+    background-attachment: fixed;
+}
+
+.navbar{
+    display:flex;
+    height:50px;
+    margin:0;
+    backdrop-filter: blur(18px);
+    background: linear-gradient(135deg,rgb(215, 153, 153),rgb(105, 145, 231));
+    transition:transform 0.3s ease;
+}
+.navbar:hover{
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    transform:scale(0.99);
+    border-radius:8px;
+}
+a.logout{
+    width:auto;
+    height:20px;
+    margin:8px;
+}
+.logo{
+    margin:6px;
+    font-family: "Poppins",sans-serif;
+    font-size:2rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercasse;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    transition:transform 0.3s ease;
+}
+.logo:hover{
+    transform:scale(1.03);
+    cursor:pointer;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.4);
+}
+a.profile{
+    width:50px;
+    justify-self: center;
+    align-self: center;
+    justify-content: end;
+}
+a.import{
+    height:18px;
+    align-self:center;
+}
+.system{
+    display:grid;
+    margin-left: auto;
+    grid-template-columns: repeat(3,1fr);
+    column-gap: 2px;
+    justify-content: end;
+       
+}
+a{
+    border:1px solid black;
+    min-width:90px;
+    border-radius: 12px;
+    background:rgba(255, 255, 255, 0.336);
+    text-decoration: none;
+    color:black;
+    text-align: center;
+    padding:6px;
+    justify-self: center;
+    transition:transform 0.5s ease;
+    font-size:1em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+a:hover{
+    transform:scale(1.08);
+    cursor:pointer;
+}
+.system button{
+    width:80px;
+}
+.hero{
+    display:grid;
+    margin:0px;
+    padding:10px;
+    grid-template-columns:repeat(3,1fr);
+    justify-content: space-evenly;
+    gap:40px;
+
+}
+section{
+    display:grid;
+    background: rgba(255, 254, 254, 0.174);
+    border-radius: 12px;
+    width:auto;
+    height:160px;
+    padding:10px;
+    transition: transform 0.3s ease;
+}
+section:hover{
+    border:1px solid rgba(255, 255, 255, 0.314);
+    transform:scale(1.02);
+    box-shadow: 0 2px 10px;
+}
+.deleteuser{
+    
+    justify-items:center }

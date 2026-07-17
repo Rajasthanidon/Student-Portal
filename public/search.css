@@ -1,0 +1,72 @@
+*{
+    box-sizing:border-box;
+}
+body{
+    height:100vh;
+    background:linear-gradient(1500deg,rgb(111, 165, 252),rgb(215, 103, 103));
+    background-attachment: fixed;
+}
+.hero{
+    min-width: fit-content;
+    background:rgba(255,255,255,0.3);
+    border-radius: 24px;
+}
+.form-card{
+    display:grid;
+    padding: 20px;
+    grid-template-columns:repeat(3,1fr);
+    gap: 15px 25px;
+    transition:transform 0.3s ease;
+}
+.form-card:hover,.hero:hover{
+    transform:scale(0.99);
+}
+section{
+    min-width:216px;
+    min-height:90px;
+    background:rgba(87, 82, 79, 0.093);
+    border-radius:12px;
+    justify-self: center;
+    align-content: center;
+    padding:15px;
+    transition:transform 0.4s ease;
+    
+}
+section:hover{
+    box-shadow: 6px 6px 6px rgba(255, 255, 255, 0.3);
+    transform:scale(1.08)
+}
+input{
+    border-radius: 8px;
+    min-height: 25px;
+    transition:transform 0.3s ease;
+    
+}
+input:hover,input:focus{
+    border:none;
+    transform:scale(1.08);
+    box-shadow: 2px 2px 2px;
+}
+.button{
+    display:flex;
+    width:100%;
+    justify-content: center;
+}
+#button{
+    height:auto;
+    width:auto;
+    margin:20px;
+    border-radius:20px;
+    padding:10px;
+    font-size: 20px;
+    background:rgba(255, 255, 255, 0.081);
+    border:1px solid rgba(255, 255, 255, 0.184);
+    transition:transform 0.3s ease;
+}
+#button:hover{
+    transform:scale(1.08);
+    cursor:pointer;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.085);
+
+}
+

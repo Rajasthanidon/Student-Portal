@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Dashboard
+        </title>
+        <link rel="stylesheet" href="/admin_dashboard.css">
+    </head>
+    <body>
+        <nav class="navbar">
+            <h1>USER PANEL</h1>
+             <% if(msg){%>
+                <% setTimeout(()=>{
+                    msg = ""
+                },3000); %>
+                <p> <%= msg %></p>
+            <% } %>
+            <div class="system">
+            <a class="profile" href="/profile">Profile</a>
+            <a class="logout" href="/logout">Log Out</a>
+            </div>
+        </nav>
+        <div class="hero">
+            <section class="searchdata">
+                <h4>SEARCH DATA</h4>
+                <p>here you can find info about students and faculty</p>
+                <a class="search" href="/search" >SEARCH</a>
+            </section>
+            <section class="updatedata">
+                <h4>REQUEST UPDATE</h4>
+                <p>request to update or add data</p>
+                <a class="request" href="/update/request">REQUEST</a>
+            </section>
+            <section class="deletedata">
+                <h4>DELETE DATA</h4>
+                <p>you can request to delete any data</p>
+                <a class="delete" href="/delete/data/request">DELETE DATA</a>
+            </section>
+        </div>
+    </body>
+</html>

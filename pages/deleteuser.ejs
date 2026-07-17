@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scsle=1.0">
+        <title>
+            DELETE USER
+        </title>
+        <link rel="stylesheet" href="/deleteuser.css">
+    </head>
+    <body>
+        <div class="form-card"> 
+            <form method="POST" action="/delete/user">
+                <div class="name">
+                    <label for="name">
+                        Name:
+                    </label>
+                    <input type="text" placeholder="Name" id="name" name="name" required>
+                </div>
+                <div class="username">
+                    <label for="username">
+                        Username:
+                    </label>
+                    <input type="text" placeholder="username" id="username" name="username" required>
+                </div>
+                    <div class="button">
+                        <button type="submit" class="button" id="button">DELETE</button>
+                    </div>
+                    <div>
+                       <% if(msg){ %>
+                           <%= msg %>
+                       <% } %>
+                    </div>
+            </form>
+        </div>
+    </body>
+</html>

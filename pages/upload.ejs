@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scsle=1.0">
+        <title>
+            SEARCH
+        </title>
+        <link rel="stylesheet" href="/upload.css">
+    </head>
+    <body>
+        <h3>
+            <a href="/admin_dashboard">Back</a>
+        </h3>
+        <div class="hero">
+            <form method="POST" action="/import" enctype="multipart/form-data">
+                <div>
+                    <input type="file" name="excel">
+                    <button type="submit">upload</button>
+                </div>
+                <div class="msg">
+                    <% if(msg){ %>
+                        <%= msg %>
+                    <% } %>
+                </div>
+            </form>
+        </div>
+            
+        
+    </body>
+</html>

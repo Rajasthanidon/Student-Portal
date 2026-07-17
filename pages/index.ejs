@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scsle=1.0">
+        <title>
+            User login
+        </title>
+        <link rel="stylesheet" href="/index.css">
+    </head>
+    <body>
+        <div class="form-card"> 
+            <form method="POST" action="/">
+                <label for="Username">
+                    Username:
+                </label>
+                    <input type="text" placeholder="username" name="username" required>
+                <label for="Password">
+                    Password: 
+                </label>
+                    <input type="password" placeholder="password" name="password" id="password" required>
+                    <button type="button" id="see">🙈</button>
+                    <div class="error" id="error">
+                        <% if(msg){%>
+                        <%= msg %>  <% }%>
+                    </div>
+                    <div class="button">
+                        <button type="submit" class="button" id="button">Login</button>
+                    </div>
+            </form>
+        </div>
+        <script>
+            const pass = document.getElementById("password");
+const see = document.getElementById("see");
+see.addEventListener("mouseover",() => {
+        pass.type = "text";
+        see.textContent = "👀";
+    
+});
+let timer;
+see.addEventListener("click", ()=>{
+    clearTimeout(timer);
+    if(pass.type==="password"){
+    pass.type= "text";
+    see.textContent = "👀";}
+    timer = setTimeout(()=>{
+        pass.type="password";
+        see.textContent = "🙈";
+    },3000);
+
+});
+see.addEventListener("mouseout", () => {
+    pass.type = "password";
+    see.textContent = "🙈"
+});
+
+        </script>
+    </body>
+</html>
