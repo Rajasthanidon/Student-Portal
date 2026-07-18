@@ -5,11 +5,9 @@ function getstudent(req,res){
             return res.send(err.message);
         }
         if(!row){
-            console.log("return to search");
             return res.redirect("/search");
         }
         req.session.message = row;
-        console.log("search result found");
         return res.json(row);
     });
 }

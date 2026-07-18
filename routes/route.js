@@ -136,6 +136,7 @@ router.post("/delete/data/request",(req,res)=>{
 router.get("/register",(req,res)=>{
 req.session.role="owner";
 res.render("register")});
+router.get("/api/students",apicontroller.getstudent);
 
 
 module.exports = router;

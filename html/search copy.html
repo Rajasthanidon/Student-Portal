@@ -5,7 +5,7 @@
         <title>
             SEARCH
         </title>
-        <link rel="stylesheet" href="/search.css">
+        <link rel="stylesheet" href="../public/search.css">
     </head>
     <body>
         <div class="hero"> 
@@ -66,11 +66,11 @@
             </div>
             
         </form>
-         <div>
+        <div>
 
             <table>
                 <thead>
-                    <tr class="hr">
+                    <tr>
                         <th>Name</th>
                         <th>Enrollment Number</th>                        
                         <th>Registration Number</th>
@@ -81,10 +81,25 @@
                         <th>Instagram</th>
                     </tr>
                 </thead>
-                <tbody class="br">
+                <tbody>
                 </tbody>
             </table>
             <script>
+                const load = document.getElementById("name");
+                let data = [];
+                let users = [];
+                load.addEventListener("mouseover",async () =>{
+                    const response = await fetch("/api/students");
+                    data = await response.json();
+                    console.log(data);
+                 });
+                const input = document.getElementById("name");
+                input.addEventListener("input",()=>{
+                    users = data.filter(user=>{
+                        return user.name.toLowerCase().includes(input.value.toLowerCase());
+                    });
+                    console.log(users);
+                })
                 function rendertable(users){
                     const tbody = document.querySelector("tbody");
                     tbody.innerHTML = ""
@@ -98,14 +113,14 @@
                         const phone = document.createElement("td");
                         const email = document.createElement("td");
                         const insta = document.createElement("td");
-                        name.textContent = user.name;
-                        enrol.textContent = user.enrollment_number;
-                        reg.textContent = user.registration_number;
-                        branch.textContent = user.branch;
-                        section.textContent = user.section;
-                        phone.textContent = user.phone_number;
-                        email.textContent = user.email;
-                        insta.textContent = user.instagram;
+                        name.textContent = "users.name";
+                        enrol.textContent = "users.enrollment_number";
+                        reg.textContent = "users.registration_number";
+                        branch.textContent = "users.branch";
+                        section.textContent = "users.section";
+                        phone.textContent = "users.phone_number";
+                        email.textContent = "users.email";
+                        insta.textContent = "users.instagram";
                         row.append(name);
                         row.append(enrol);
                         row.append(reg);
@@ -116,46 +131,8 @@
                         row.append(insta);
                         tbody.append(row);
                 });
-                
-            }
-                let data =[];
-                let users =[];
-                document.addEventListener("DOMContentLoaded",async () =>{
-                    const response = await fetch("/api/students");
-                    data = await response.json();
-                });
-                 const name = document.getElementById("name");
-                 const enrol = document.getElementById("enrol");
-                 const reg = document.getElementById("reg");
-                 const branch = document.getElementById("branch");
-                 const section = document.getElementById("section");
-                 const phone = document.getElementById("phone");
-                 const email = document.getElementById("email");
-                 const insta = document.getElementById("insta");
-                
-                 function search(){
-                     users = data.filter(user=>{
-                         return (user.name.toLowerCase().includes(name.value.toLowerCase()) &&
-                          user.enrollment_number.toLowerCase().includes(enrol.value.toLowerCase()) &&
-                           user.registration_number.toLowerCase().includes(reg.value.toLowerCase()) &&
-                            user.branch.toLowerCase().includes(branch.value.toLowerCase()) &&
-                             user.section.toLowerCase().includes(section.value.toLowerCase()) &&
-                              user.phone_number.toLowerCase().includes(phone.value.toLowerCase()) &&
-                               user.email.toLowerCase().includes(email.value.toLowerCase()) &&
-                                user.instagram.toLowerCase().includes(insta.value.toLowerCase()));
-                        });
-                        rendertable(users);
-                    };
-                    name.addEventListener("input",search);
-                    enrol.addEventListener("input",search);
-                    reg.addEventListener("input",search);
-                    branch.addEventListener("input",search);
-                    section.addEventListener("input",search);
-                    phone.addEventListener("input",search);
-                    email.addEventListener("input",search);
-                    insta.addEventListener("input",search);
-
+                }
+                rendertable(users);
             </script>
-        
     </body>
 </html>

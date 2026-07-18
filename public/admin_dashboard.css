@@ -84,7 +84,7 @@ a:hover{
     display:grid;
     margin:0px;
     padding:10px;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
     justify-content: space-evenly;
     gap:40px;
 
@@ -93,7 +93,7 @@ section{
     display:grid;
     background: rgba(255, 254, 254, 0.174);
     border-radius: 12px;
-    width:auto;
+    /* width:auto; */
     height:160px;
     padding:10px;
     transition: transform 0.3s ease;
@@ -106,3 +106,14 @@ section:hover{
 .deleteuser{
     
     justify-items:center }
+
+
+
+@media(max-width:360px){
+        .logo{
+            font-size: ;
+        }
+        .ejs{
+            font-size:10px
+        }
+    }
