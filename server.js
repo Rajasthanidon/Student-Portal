@@ -1,4 +1,9 @@
 const app = require("./app");
-app.listen(3000,() => {
-    console.log("server started");
-});
+const createtables = require("./database/db")
+async function start(){
+    await createtables();
+    app.listen(3000,()=>{
+        console.log("server started")
+    });
+}
+start();

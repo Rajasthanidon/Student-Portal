@@ -29,17 +29,17 @@
                     </tr>
                 </thead>
                  <tbody class="body">
-                  <%  users.forEach(user =>{ %>
+                  <% users.forEach(user =>{ %>
 
                         <tr class="br">
-                            <td><%= user.NAME %></td>
-                            <td><%= user.ENROLLMENT_NUMBER %></td>
-                            <td><%= user.REGISTRATION_NUMBER %></td>
-                            <td><%= user.BRANCH %></td>
-                            <td><%= user.SECTION %></td>
-                            <td><%= user.PHONE_NUMBER %></td>
-                            <td><%= user.EMAIL %></td>
-                            <td><%= user.INSTAGRAM %></td>
+                            <td><%= user.name %></td>
+                            <td><%= user.enrollment_number %></td>
+                            <td><%= user.registration_number %></td>
+                            <td><%= user.branch %></td>
+                            <td><%= user.section %></td>
+                            <td><%= user.phone_number %></td>
+                            <td><%= user.email %></td>
+                            <td><%= user.instagram %></td>
                         </tr>
                    <% }); %>
                 </tbody>

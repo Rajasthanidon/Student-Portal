@@ -1,18 +1,13 @@
-const sqlite3 = require("sqlite3").verbose();
-const db = new sqlite3.Database("./database/users.db",(err)=> {
-    if(err){
-        console.log(err.message);
-    }
-    console.log("Database connected succesfully");
-});
-db.run(`CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+const pool = require("./connection");
+async function createtables() { 
+    await pool.query(`CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
     name TEXT,
     username TEXT,
     password TEXT,
     role TEXT);`);
-    db.run(`CREATE TABLE IF NOT EXISTS students (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+    await pool.query(`CREATE TABLE IF NOT EXISTS students (
+        id SERIAL PRIMARY KEY,
         ENROLLMENT_NUMBER TEXT,
         REGISTRATION_NUMBER TEXT,
         NAME TEXT,
@@ -21,6 +16,9 @@ db.run(`CREATE TABLE IF NOT EXISTS users (
         EMAIL TEXT,
         PHONE_NUMBER TEXT,
         INSTAGRAM TEXT,
+        ADDRESS TEXT,
         LINKDIN TEXT
         )`)
-module.exports = db;
+        console.log("Database connected succesfully");
+}
+module.exports = createtables;

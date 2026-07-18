@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scsle=1.0">
+        <title>
+            ADD USER
+        </title>
+        <link rel="stylesheet" href="/adduser.css">
+    </head>
+    <body>
+        <div class="form-card"> 
+            <form method="POST" action="/add/admin">
+                <div>
+                    <label for="name">
+                        Name:
+                    </label>
+                    <input type="text" placeholder="Name" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="username">
+                        Username:
+                    </label>
+                    <input type="text" placeholder="username" id="username" name="username" required>
+                </div>
+                <div>
+                    <label for="password">
+                        Password: 
+                    </label>
+                    <input type="password" placeholder="password" name="password" id="password" required>
+                </div>
+                <div>
+                    <label for="confirmpassword">
+                        Confirm Password: 
+                    </label>
+                    <input type="password" placeholder="confirm password" name="confirmpassword" id="confirmpassword" required>
+                </div>
+                    <!-- <div class="role">
+                        <div class="selectit">
+                            <div class="select">select</div>
+                            <div>🔻</div>
+                        </div>
+                        <div class="option">
+                            <div>admin</div>
+                            <div>user</div>
+                        </div>
+                    </div> -->
+                    <div class="button">
+                        <button type="submit" class="button" id="button">ADD</button>
+                    </div>
+            </form>
+        </div>
+    </body>
+</html>
