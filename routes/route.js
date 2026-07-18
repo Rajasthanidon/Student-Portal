@@ -58,7 +58,7 @@ router.post("/delete/data",(req,res)=>{
     res.redirect("/admin_dashboard");
     
 });
-router.get("/search",(req,res)=>{
+router.get("/search",checklogin,(req,res)=>{
     res.render("search");
     
 });
@@ -133,10 +133,10 @@ router.post("/delete/data/request",(req,res)=>{
     
     res.redirect("/user_dashboard");
 });
-router.get("/register",(req,res)=>{
+router.get("/register",adminlogin,(req,res)=>{
 req.session.role="owner";
 res.render("register")});
-router.get("/api/students",apicontroller.getstudent);
+router.get("/api/students",checklogin,apicontroller.getstudent);
 
 
 module.exports = router;
