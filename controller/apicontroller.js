@@ -1,5 +1,6 @@
 const searchmodel = require("../models/searchmodel");
 function getstudent(req,res){
+    console.log("api")
     searchmodel.alldata((err,row)=>{
          if(err){
             return res.send(err.message);
