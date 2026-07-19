@@ -6,7 +6,7 @@ const adminlogin = require("../middleware/adminauth");
 const ownerlogin = require("../middleware/ownerauth");
 const upload = require("../middleware/upload");
 const path = require("path");
-const xlsx = require("xlsx");
+
 const searchcontroller = require("../controller/searchcontroller");
 const apicontroller = require("../controller/apicontroller");
 
@@ -58,7 +58,7 @@ router.post("/delete/data",(req,res)=>{
     res.redirect("/admin_dashboard");
     
 });
-router.get("/search",checklogin,(req,res)=>{
+router.get("/search",ownerlogin,(req,res)=>{
     res.render("search");
     
 });
@@ -79,21 +79,13 @@ router.get("/logout",checklogin,(req,res)=>{
         
     });
 });
-router.get("/import",adminlogin,(req,res)=>{
+router.get("/import",(req,res)=>{
     const msg = req.session.message;
      res.render("upload",{msg});
     delete req.session.message;
   
 })
-router.post("/import",upload.single("excel"),async (req,res)=>{
-  
-    const workbook = xlsx.readFile(req.file.path);
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
-    const data = xlsx.utils.sheet_to_json(sheet);
-    req.session.message="FILE SUCCESFULLY UPLOADED"
-    
-    res.redirect("/import")
-});
+router.post("/import",upload.single("excel"),searchcontroller.importdata);
 router.get("/user_dashboard",checklogin,(req,res)=>{
    
    const msg = req.session.message;
@@ -107,7 +99,7 @@ router.get("/result",(req,res)=>
    
 });
 router.get("/update/data",adminlogin,(req,res)=>{
-   
+    
     res.render("updatedata");
 });
 router.post("/update/data",(req,res)=>{
@@ -136,7 +128,7 @@ router.post("/delete/data/request",(req,res)=>{
 router.get("/register",adminlogin,(req,res)=>{
 req.session.role="owner";
 res.render("register")});
-router.get("/api/students",checklogin,apicontroller.getstudent);
+router.get("/api/students",ownerlogin,apicontroller.getstudent);
 
 
 module.exports = router;

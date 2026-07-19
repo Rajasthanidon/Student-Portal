@@ -1,4 +1,5 @@
 const searchmodel = require("../models/searchmodel");
+const xlsx = require("xlsx");
 function search(req,res){
    
         searchmodel.searchstudent(req.body.name + "%",req.body.enrol + "%",req.body.reg+"%",req.body.branch,req.body.section,req.body.email,req.body.phone,req.body.insta,(err,row)=>{
@@ -98,7 +99,49 @@ function adduser(req,res){
     });
 
 }
+function importdata(req,res){
+    async function result(){
+        const workbook = xlsx.readFile(req.file.path);
+        const sheet = workbook.Sheets[workbook.SheetNames[0]];
+        const data = xlsx.utils.sheet_to_json(sheet);
+        req.session.message="FILE SUCCESFULLY UPLOADED"
+        data.forEach(user=>{
+            searchmodel.searchenrol(user.enrollment_number,(err,row)=>{
+                if(!row){
+                    return;
+                }
+                if(row.phone_number==="Not Available"){
+                    searchmodel.adddata(user.enrollment_number,null,user.phone,null,(err,row)=>{
+                        console.log("phone==")
+                        searchmodel.searchenrol(user.enrollment_number,(err,row)=>{
+                        })
+                    }); 
+                }
+                if(row.email==="Not Available"){
+                    searchmodel.adddata(user.enrollment_number,null,null,user.email,(err,row)=>{
+                        console.log("email==")
+                        searchmodel.searchenrol(user.enrollment_number,(err,row)=>{
+                        })
+                    });
+                    
+                }
+                if(row.registration_number==="Not Available"){
+                    searchmodel.adddata(user.enrollment_number,user.registration,null,null,(err,row)=>{
+                        console.log("phone==");
+                        searchmodel.searchenrol(user.enrollment_number,(err,row)=>{
+                            // console.log(row);
+                        })
+                    });
+                
+                }
+            })
+        })
+        res.redirect("/import")
+    }
+        result();
+    };
+
 
 module.exports = {
-    search,login,deleteuser,adduser
+    search,login,deleteuser,adduser,importdata
 }

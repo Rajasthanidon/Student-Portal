@@ -82,6 +82,30 @@ function adduser(name,username,password,role,callback){
     result();
 
 }
-module.exports = {
-    searchstudent,login,search,deletestudent,alldata,adduser
+function importdata(enrol,phone,callback){
+
+}
+function searchenrol(enrol,callback){
+    async function result(){
+        try{
+        const res = await pool.query(`SELECT * FROM students WHERE enrollment_number = $1`,[enrol]);
+        const row = res.rows[0];
+        callback(null,row);}
+        catch(err){
+            callback(err,null);
+        }
+    }
+    result();
+}
+function adddata(enrol,reg,phone,email,callback){
+    console.log("adddata")
+async function result(){
+    const res = await pool.query(`UPDATE students SET phone_number = COALESCE($1,phone_number),email = COALESCE($2,email),registration_number = COALESCE($3,registration_number) WHERE enrollment_number = $4`,[phone,email,reg,enrol]);
+    console.log("insert succesful")
+    console.log(`phone = ${phone},email = ${email},reg = ${reg}`);
+}
+result();
+}
+module.exports = { 
+    searchstudent,login,search,deletestudent,alldata,adduser,importdata,adddata,searchenrol
 };
