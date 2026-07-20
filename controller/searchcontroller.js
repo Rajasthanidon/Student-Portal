@@ -105,12 +105,45 @@ function importdata(req,res){
         const workbook = xlsx.readFile(req.file.path);
         const sheet = workbook.Sheets[workbook.SheetNames[0]];
         const data = xlsx.utils.sheet_to_json(sheet);
-        console.log(data)
-        data.forEach(user=>{
-            searchmodel.searchstudent(user.name,user.enrol,user.reg,user.branch,user.section,user.email,user.phone,user.isnta,(err,row)=>{
-                
-            })
-        })
+        let userupdatecount = 0;
+        let userfailedcount = 0;
+        let useraddcount = 0;
+        let useraddfailcount = 0;
+        let userexists = false;
+        for( const user of data){
+             await searchmodel.update(user.name,user.enrollment_number,user.registration,user.section,user.branch,user.phone,user.email,user.instagram,(err,row)=>{
+                if(row===true){
+                    userupdatecount++;
+                }
+                else if(row===false){
+                    userfailedcount++;
+                }
+                else if(row===null){
+                    searchmodel.add(user.name,user.enrollment_number,user.registration,user.branch,user.section,user.phone,user.email,user.instagram,user.address,(err,row)=>{
+                        if(row===true){
+                            useraddcount++
+                            userexists = false
+                        }
+                        else if(row===null){
+                            console.log(err.message);
+                            useraddfailcount++
+                            userexists= false
+                        }
+                        else{ 
+                            console.log("user already exist:- ")
+                            row.forEach(user=>{
+                            console.log(user.name);
+                            console.log(user.section)
+                            userexists =true;
+                            })
+                        }
+                    })
+                }
+                })
+            }
+            req.session.message = `${userupdatecount} USER UPDATED,   ${userfailedcount} USER FAILED TO UPDATE,   ${useraddcount} USER ADDED,   ${useraddfailcount} USER FAIL TO ADD`;
+            res.redirect("/import")
+        
     }
 result();
 }

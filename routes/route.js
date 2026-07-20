@@ -17,14 +17,14 @@ router.get("/",(req,res)=>{
     
 });
 router.post("/",searchcontroller.login);
-router.get("/add/user",adminlogin,(req,res)=>{
+router.get("/add/user",ownerlogin,(req,res)=>{
     const msg = req.session.message;
     req.session.role = "user"
     res.render("adduser",{msg});
     delete req.session.message;
    
 });
-router.post("/add/user",adminlogin,searchcontroller.adduser);
+router.post("/add/user",ownerlogin,searchcontroller.adduser);
 router.get("/add/admin",ownerlogin,(req,res)=>{
     const msg = req.session.message;
     req.session.role = "admin";
@@ -33,14 +33,14 @@ router.get("/add/admin",ownerlogin,(req,res)=>{
     
 });
 router.post("/add/admin",ownerlogin,searchcontroller.adduser);
-router.get("/delete/user",adminlogin,(req,res)=>{
+router.get("/delete/user",ownerlogin,(req,res)=>{
     const msg = req.session.message;
     req.session.role = "user";
     res.render("deleteuser",{msg});
     delete req.session.message;
     
 });
-router.post("/delete/user",adminlogin,searchcontroller.deleteuser);
+router.post("/delete/user",ownerlogin,searchcontroller.deleteuser);
 router.get("/delete/admin",ownerlogin,(req,res)=>{
     const msg = req.session.message;
     req.session.role = "admin";
@@ -58,12 +58,12 @@ router.post("/delete/data",ownerlogin,(req,res)=>{
     res.redirect("/admin_dashboard");
     
 });
-router.get("/search",checklogin,(req,res)=>{
+router.get("/search",ownerlogin,(req,res)=>{
     res.render("search");
     
 });
-router.post("/search",checklogin,searchcontroller.search);
-router.get("/admin_dashboard",adminlogin,(req,res)=>{
+router.post("/search",ownerlogin,searchcontroller.search);
+router.get("/admin_dashboard",ownerlogin,(req,res)=>{
     const msg = req.session.message;
      res.render("admin_dashboard",{msg});
     delete req.session.message;
@@ -79,44 +79,44 @@ router.get("/logout",checklogin,(req,res)=>{
         
     });
 });
-router.get("/import",(req,res)=>{
+router.get("/import",ownerlogin,(req,res)=>{
     const msg = req.session.message;
      res.render("upload",{msg});
     delete req.session.message;
   
 })
-router.post("/import",upload.single("excel"),searchcontroller.importdata);
+router.post("/import",ownerlogin,upload.single("excel"),searchcontroller.importdata);
 router.get("/user_dashboard",checklogin,(req,res)=>{
    
    const msg = req.session.message;
     return res.render("user_dashboard",{msg});
 })
-router.get("/result",(req,res)=>
+router.get("/result",ownerlogin,(req,res)=>
 {
     const users = req.session.message;
     res.render("result",{users:users});
     delete req.session.message;
    
 });
-router.get("/update/data",adminlogin,(req,res)=>{
+router.get("/update/data",ownerlogin,(req,res)=>{
     
     res.render("updatedata");
 });
-router.post("/update/data",adminlogin,searchcontroller.add);
-router.get("/update/request",checklogin,(req,res)=>{
+router.post("/update/data",ownerlogin,searchcontroller.add);
+router.get("/update/request",ownerlogin,(req,res)=>{
    
     res.render("requestupdate");
 });
-router.post("/update/request",checklogin,(req,res)=>{
+router.post("/update/request",ownerlogin,(req,res)=>{
     req.session.message = "REQUEST SENT";
     
     res.redirect("/user_dashboard");
 });
-router.get("/delete/data/request",checklogin,(req,res)=>{
+router.get("/delete/data/request",ownerlogin,(req,res)=>{
     
     res.render("requestdelete");
 });
-router.post("/delete/data/request",checklogin,(req,res)=>{
+router.post("/delete/data/request",ownerlogin,(req,res)=>{
     req.session.message = "REQUEST SENT";
     
     res.redirect("/user_dashboard");
