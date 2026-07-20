@@ -105,75 +105,14 @@ function importdata(req,res){
         const workbook = xlsx.readFile(req.file.path);
         const sheet = workbook.Sheets[workbook.SheetNames[0]];
         const data = xlsx.utils.sheet_to_json(sheet);
+        console.log(data)
         data.forEach(user=>{
-            if(searchmodel.add(user.name,user.enrollment_number,user.registration,user.branch,user.section,user.phone,user.email,user.instagram,user.address,(err,row)=>{})){
-                return ;
-            }
-             searchmodel.searchenrol(user.enrollment_number,(err,row)=>{})
-            if(user.enrollment_number){
-                searchmodel.searchenrol(user.enrollment_number,(err,row)=>{
-                if(!row){
-                    return;
-                }
-                if(row.phone_number==="Not Available" && user.phone){
-                    searchmodel.updatedata(null,user.enrollment_number,null,user.phone,null,(err,row)=>{
-                    }); 
-                }
-                if(row.email==="Not Available" && user.email){
-                    searchmodel.updatedata(null,user.enrollment_number,null,null,user.email,(err,row)=>{
-                    })
-                }
+            searchmodel.searchstudent(user.name,user.enrol,user.reg,user.branch,user.section,user.email,user.phone,user.isnta,(err,row)=>{
                 
-                if(row.registration_number==="Not Available" && user.registration){
-                    searchmodel.updatedata(null,user.enrollment_number,user.registration,null,null,(err,row)=>{
-                    });
-                }
-            })}
-            
-            
-            if(user.registration){
-                searchmodel.searchreg(user.registration,(err,row)=>{
-                    if(!row) return;
-                    if(row.phone_number==="Not Available" && user.phone){
-                        searchmodel.updatedata(null,null,user.registration,user.phone,null,(err,row)=>{});
-                    }
-                    
-                    if(row.email==="Not Available" && user.email){
-                        searchmodel.updatedata(null,null,user.registration,null,null,(err,row)=>{})
-                                                                    }
-                                                                    
-                    if(row.enrollment_number==="Not Available" && user.enrollment){
-                    searchmodel.updatedata(null,user.enrollment,user.registration,null,null,(err,row)=>{});
-                                                                    }
-                                                                })}
-          if(user.name){                                     
-                searchmodel.searchname(user.name,(err,row)=>{
-                    if(!row) return;
-                    if(row.enrollment_number==="Not Available" && user.enrollment_number){
-                        console.log(row.enrollment_number)
-                        searchmodel.updatedata(user.name,user.enrollment_number,null,null,null,(err,row)=>{
-                        })
-                    }
-                    
-                    if(row.registration_number==="Not Available" && user.registration){
-                        seachmodel.updatedata(user.name,null,user.registration,null,null,(err,row)=>{})
-                    }
-                    
-                    if(row.phone_number==="Not Available" && user.phone){
-                        seachmodel.updatedata(user.name,null,null,user.phone,null,(err,row)=>{})
-                    }
-                    
-                    if(row.email==="Not Available" && user.email){
-                        searchmodel.updatedata(user.name,null,null,null,user.email,(err,row)=>{})
-                                                                    }
-                                                                });
-                                                            }
-
+            })
         })
-        req.session.message="FILE SUCCESFULLY UPLOADED"
-        res.redirect("/import")
     }
-    result();
+result();
 }
 function add(req,res){
     searchmodel.add(req.body.name,req.body.enrol,req.body.reg,req.body.branch,req.body.section,req.body.phone,req.body.email,req.body.insta,req.body.address,(err,row)=>{

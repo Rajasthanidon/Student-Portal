@@ -1,5 +1,35 @@
 const pool = require("../database/connection")
 function searchstudent(name,enrol,reg,branch,section,email,phone,insta,callback) {
+    name = name?.trim();
+    enrol = enrol?.trim();
+    branch = branch?.trim();
+    section = section?.trim();
+    email = email?.trim();
+    insta = insta?.trim();
+    if(!name){
+        name = "";
+    }
+    if(!enrol){
+        enrol = "";
+    }
+    if(!reg){
+        reg = "";
+    }
+    if(!branch){
+        branch= ""
+    }
+    if(!section){
+        section = ""
+    }
+    if(!email){
+        email=""
+    }
+    if(!phone){
+        phone="";
+    }
+    if(!insta){
+        insta = "";
+    }
     
     async function result(){
         
@@ -8,7 +38,6 @@ function searchstudent(name,enrol,reg,branch,section,email,phone,insta,callback)
             const res = await pool.query(`SELECT * FROM students WHERE name ILIKE $1 || '%' AND enrollment_number ILIKE '%' || $2 || '%' AND
                 registration_number ILIKE '%' || $3 || '%' AND branch ILIKE '%' || $4 || '%' AND section ILIKE $5 || '%' AND email ILIKE '%' || $6 || '%' AND phone_number ILIKE '%' || $7 || '%' AND instagram ILIKE '%' || $8 || '%' `,[name,enrol,reg,branch,section,email,phone,insta]);
             const row = res.rows;
-            console.log(row)
             callback(null,row)
         }
         catch(err){
@@ -47,19 +76,6 @@ function search(name,username,callback){
     }
 result();
 };
-function deletestudent(id,callback){
-async function result(){
-    try{
-    const row = await pool.query(`DELETE FROM users WHERE id = $1`,[id]);
-    callback(null);
-}
-    catch(err){
-        callback(err);
-
-    }
-}
-result();
-}
 function alldata(callback){
      async function result(){
         try{
@@ -85,86 +101,6 @@ function adduser(name,username,password,role,callback){
     result();
 
 }
-function importdata(enrol,phone,callback){
-
-}
-function searchenrol(enrol,callback){
-    async function result(){
-        try{
-        const res = await pool.query(`SELECT * FROM students WHERE enrollment_number = $1`,[enrol]);
-        const row = res.rows[0];
-        callback(null,row);}
-        catch(err){
-            callback(err,null);
-        }
-    }
-    result();
-}
-function searchreg(reg,callback){
-    async function result(){
-        try{
-            const res = await pool.query(`SELECT * FROM students WHERE registration_number = $1`,[reg]);
-            const row = res.rows[0];
-            callback(null,row);
-        }
-        catch(err){
-            callback(err,null);
-        }
-    }
-    result();
-}
-
-function searchname(name,callback){
-    async function result(){
-        try{
-            const res = await pool.query(`SELECT * FROM students WHERE name = $1`,[name]);
-            const temp = res.rows;
-            if(!temp[0]) return callback(null,null);
-            if(temp.length>1){
-                console.log("duplicate data found");
-                temp.forEach(user=>{
-                    console.log(user);
-                })
-                callback(null,null)
-                return;
-            }
-            const row = temp[0]
-            // console.log("OUTDATED ROW = ")
-            // console.log(row)
-            callback(null,row);
-        }
-        catch(err){
-            callback(err,null)
-        }
-    }
-    result();
-}
-function updatedata(name,enrol,reg,phone,email,callback){
-async function result(){
-    const res = await pool.query(`UPDATE students SET phone_number = COALESCE($1,phone_number),email = COALESCE($2,email),registration_number = COALESCE($3,registration_number),enrollment_number = COALESCE($4,enrollment_number) WHERE (enrollment_number = $5 OR registration_number = $6 OR name = $7) RETURNING *`,[phone,email,reg,enrol,enrol,reg,name]);
-    if(enrol){
-        console.log(`Enroll = ${enrol}`)
-    }
-    if(name){
-        console.log(`Name = ${name}`)    
-    }
-    if(reg){  
-        console.log(`Registration = ${reg}`)
-    }
-    if(phone){
-        console.log(`Phone number = ${phone}`)
-    }
-    if(email){
-        console.log(`Email = ${email}`)
-    }
-    console.log("Updated row = ")
-    console.log(res.rows[0])
-    console.log(res.rowCount)
-    console.log( "row updated")
-    callback(null,null)
-}
-result();
-}
 function add(name,enrol,reg,branch,section,phone,email,insta,address,callback){
     async function result(){
         let row = "";
@@ -181,7 +117,7 @@ function add(name,enrol,reg,branch,section,phone,email,insta,address,callback){
             value.push(enrol);
             i++;
         }
-        if(reg?.trim()){
+        if(reg?.toString().trim()){
             conditions.push(`UPPER(registration_number) = UPPER($${i})`);
             value.push(reg);
             i++;
@@ -212,8 +148,6 @@ function add(name,enrol,reg,branch,section,phone,email,insta,address,callback){
         if(!email) email = "Not Available";
         if(!insta) insta = "Not Available";
         if(!address) address = "Not Available";
-        console.log(res.rows)
-        console.log(res.rows.length)
         if(res.rows.length===0){ const add = await pool.query(`INSERT INTO students(name,enrollment_number,registration_number,branch,section,phone_number,email,instagram,address) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9)`,[name,enrol,reg,branch,section,phone,email,insta,address],()=>{
             console.log(`name = ${name} | enrollment = ${enrol} | registration = ${reg} | Branch = ${branch} | Section = ${section} | Phone number = ${phone} | Email = ${email} | Instagram = ${insta} | Address = ${address}`);
             
@@ -230,5 +164,5 @@ function add(name,enrol,reg,branch,section,phone,email,insta,address,callback){
 
 }
 module.exports = { 
-    searchstudent,login,search,deletestudent,alldata,adduser,importdata,updatedata,searchenrol,searchreg,searchname,add
+    searchstudent,login,search,alldata,adduser,add,find
 };

@@ -58,11 +58,11 @@ router.post("/delete/data",ownerlogin,(req,res)=>{
     res.redirect("/admin_dashboard");
     
 });
-router.get("/search",ownerlogin,(req,res)=>{
+router.get("/search",checklogin,(req,res)=>{
     res.render("search");
     
 });
-router.post("/search",ownerlogin,searchcontroller.search);
+router.post("/search",checklogin,searchcontroller.search);
 router.get("/admin_dashboard",adminlogin,(req,res)=>{
     const msg = req.session.message;
      res.render("admin_dashboard",{msg});
@@ -79,19 +79,19 @@ router.get("/logout",checklogin,(req,res)=>{
         
     });
 });
-router.get("/import",ownerlogin,(req,res)=>{
+router.get("/import",(req,res)=>{
     const msg = req.session.message;
      res.render("upload",{msg});
     delete req.session.message;
   
 })
-router.post("/import",ownerlogin,upload.single("excel"),searchcontroller.importdata);
+router.post("/import",upload.single("excel"),searchcontroller.importdata);
 router.get("/user_dashboard",checklogin,(req,res)=>{
    
    const msg = req.session.message;
     return res.render("user_dashboard",{msg});
 })
-router.get("/result",ownerlogin,(req,res)=>
+router.get("/result",(req,res)=>
 {
     const users = req.session.message;
     res.render("result",{users:users});
