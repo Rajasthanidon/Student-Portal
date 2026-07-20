@@ -164,5 +164,5 @@ function add(name,enrol,reg,branch,section,phone,email,insta,address,callback){
 
 }
 module.exports = { 
-    searchstudent,login,search,alldata,adduser,add,find
+    searchstudent,login,search,alldata,adduser,add
 };
