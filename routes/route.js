@@ -69,7 +69,7 @@ router.get("/admin_dashboard",ownerlogin,(req,res)=>{
     delete req.session.message;
     
 });
-router.get("/logout",checklogin,(req,res)=>{
+router.get("/logout",ownerlogin,(req,res)=>{
     req.session.destroy((err)=>{
         if(err){
             return res.send(err.message);
@@ -86,7 +86,7 @@ router.get("/import",ownerlogin,(req,res)=>{
   
 })
 router.post("/import",ownerlogin,upload.single("excel"),searchcontroller.importdata);
-router.get("/user_dashboard",checklogin,(req,res)=>{
+router.get("/user_dashboard",ownerlogin,(req,res)=>{
    
    const msg = req.session.message;
     return res.render("user_dashboard",{msg});
