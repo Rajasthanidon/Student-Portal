@@ -31,17 +31,19 @@ function login(req,res){
                     role:row.role
                 };
                 if(row.role==="admin"||row.role==="owner"){
-                    
-                    res.redirect("/admin_dashboard");
+                    req.session.message = "chla ja bosdike"
+                    res.redirect("/");
                 }
                 else{
-                   
-                    res.redirect("/user_dashboard");
+                    req.session.message = "chla ja bosdike"
+                    
+                    res.redirect("/");
                 }
             }
             else{
                 
-                req.session.message="username or password is invalid";
+                req.session.message = "chla ja bosdike"
+                // req.session.message="username or password is invalid";
                 res.redirect("/");
             }
         }

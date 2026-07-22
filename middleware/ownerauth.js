@@ -3,7 +3,7 @@ function ownerlogin(req,res,next){
         return res.redirect("/");
     }
     if(req.session.user.role!="owner"){
-        return res.render("admin_dashboard",{update:true,msg:"ACCESS DENIED"});
+        return res.render("index",req.session.message = "Chla ja bosdike");
     }
     next();
 }
