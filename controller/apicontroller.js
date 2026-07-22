@@ -12,6 +12,6 @@ function getstudent(req,res){
         return res.json(row);
     });
 }
-module.exports = {
-    getstudent
-}
+// module.exports = {
+//     getstudent
+// }
