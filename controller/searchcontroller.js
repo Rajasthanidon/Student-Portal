@@ -155,6 +155,6 @@ function add(req,res){
 
 }
 
-// module.exports = {
-//     search,login,deleteuser,adduser,importdata,add
-// }
+module.exports = {
+    search,login,deleteuser,adduser,importdata,add
+}
